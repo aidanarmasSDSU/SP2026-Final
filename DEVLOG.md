@@ -2,12 +2,6 @@
 
 **Student Name:** Aidan Armas
 **Student ID:** 827612871
-
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – 5/14 8:28AM- : Initial Plan
@@ -32,18 +26,13 @@ _After reading part 6, I realized pruning explanation and the science behind it 
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – 5/14 2:38: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_Your entry here._
+_Given more time, I would have liked to add more unit test cases and checked bounds more strictly. I also think my code organization was a little poor and structure could be simplified heavily. I also would set all nodes to infinty at the begin instead of loop over at the end to set unreachable nodes to infinity._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
-
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
+## Final Entry – 5/14 2:45: Time Estimate
 
 | Part | Estimated Hours |
 |---|-----------------|
@@ -51,8 +40,8 @@ _Your entry here._
 | Part 2: Precomputation Design | 90 Minutes      |
 | Part 3: Algorithm Correctness | 30 Minutes      |
 | Part 4: Search Design | 40 Minutes      |
-| Part 5: State and Search Space |                 |
-| Part 6: Pruning |                 |
-| Part 7: Implementation |                 |
-| README and DEVLOG writing |                 |
-| **Total** |                 |
+| Part 5: State and Search Space | 90 Minutes      |
+| Part 6: Pruning | 60 Minutes      |
+| Part 7: Implementation | 10 Minutes      |
+| README and DEVLOG writing | 60 Minutes      |
+| **Total** | 410 Minutes     |

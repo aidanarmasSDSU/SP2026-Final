@@ -121,25 +121,20 @@ _The entire route plan relies on correct distances to between the spawn node, re
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** _We are tracking a list best[0] storing the lowest total cost found so far and a list best[1] which stores the relic order of that found lowest total cost path._
+- **When it is used:** _It is used during pruning to compare if cost_so_far is equal to or higher than best[0]. It is updated every time a new lowest total cost path is found.
+- **What it allows the algorithm to skip:** _The algorithm is allowed to skip if cost_so_far is equal to or higher than best[0] because if it's already at a larger or equal cost, there is no way this path can result in a lower total cost. This is only true because all edge weights are nonnegative in this example._
 
 ### Part 6b: Lower Bound Estimation
 
-> Three bullets.
-
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** _At the current state, we know the current node, the remaining relics to be collected, and the costs of going to each remaining relic from the current node._
+- **What the lower bound accounts for:** _The lower bound accounts for the fuel burned so far in the given path to reach the current node._
+- **Why it never overestimates:** _I never overestimates because edge weights are all nonnegative, so any further relics to be added can only add to the cost, meaning overestimation is not possible._
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
-
-- _Your answer here._
+- _Pruning is safe because we only prune a branch if there is no possible way that certain branch/path CAN lower the total cost._
+- _All edge weights are nonnegative, so their is no way a branch with a cost higher than the best[0] can be lowered if continuing.
 
 ---
 
