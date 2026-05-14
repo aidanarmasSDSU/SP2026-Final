@@ -78,21 +78,15 @@ _The entire route plan relies on correct distances to between the spawn node, re
 ## Part 4: Search Design
 
 ### Why Greedy Fails
-
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
-
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** _Greedy strategy picks the next immediate lowest cost relic to travel to each time. This can cause problems as a local min might not always lead to a global min._
+- **Counter-example setup:** _If from S to the first relic, a crown is cost 1, and S to the second relic, a sword is cost 2, greedy would choose to travel to the crown since it's the local min cost. However, what greedy failed to notice because of its locality decision-making is the cost from the crown to the sword is 1000 while the cost from the sword to the crown is only 3. From this setup, we see that the greedy strategy is not optimal for this solution._
+- **What greedy picks:** _In the example above, greedy would choose to go to the crown first for a cost of 1 and then go to the sword for a cost of 1000, giving a total cost of 1001._
+- **What optimal picks:** _In the optimal solution, the algorithm would travel to the sword first for a cost of 2, and then travel to the crown for a total of 3, much lower than that of the greedy solution._
+- **Why greedy loses:** _Greedy loses because it doesn't look ahead. It only looks for the most optimal solution at the local level which causes a larger global total down the line. In this example it didn't look for the consequences of picking the local minimum._
 
 ### What the Algorithm Must Explore
 
-> One bullet. Must use the word "order."
-
-- _Your answer here._
+- _The algorithm must explore every possible order of visiting the relics, because we must find every combination of pathing since there is no greedy solution that can decide the order._
 
 ---
 

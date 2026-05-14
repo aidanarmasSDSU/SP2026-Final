@@ -94,7 +94,7 @@ def precompute_distances(graph, spawn, relics, exit_node):
 # =============================================================================
 
 def dijkstra_invariant_check():
-    """
+    return """
     Part 3a: What the Invariant Means
         For nodes already finalized (in S):
             This means the shortest distance to this node from source is already found and will not be altered.
@@ -109,7 +109,7 @@ def dijkstra_invariant_check():
         Termination : what the invariant guarantees when the algorithm ends:
             At the end of the loop, every reachable node has been finalized and every unreachable node is set to infinity. Every finalized node has its shortest distance from the source/spawn, showing the algorithm correctly finds the shortest path.
     Part 3c: Why This Matters for the Route Planner
-        The entire route plan relies on correct distances to between the spawn node, relic nodes, and the exit, because the planner adds them up to score each route and make a decision.
+        The entire route plan relies on correct distances to between the spawn node, relic nodes, and the exit, because the planner adds them up to score each route and make a decision._
     """
 
 
@@ -118,16 +118,19 @@ def dijkstra_invariant_check():
 # =============================================================================
 
 def explain_search():
-    """
-    Returns
-    -------
-    str
-        Your Part 4 README answers, written as a string.
-        Must match what you wrote in README Part 4.
 
-    TODO
+    return """
+    Why Greedy Fails
+        The failure mode: Greedy strategy picks the next immediate lowest cost relic to travel to each time. This can cause problems as a local min might not always lead to a global min.
+        Counter-example setup: If from S to the first relic, a crown is cost 1, and S to the second relic, a sword is cost 2, greedy would choose to travel to the crown since it's the local min cost. However, what greedy failed to notice because of its locality decision-making is the cost from the crown to the sword is 1000 while the cost from the sword to the crown is only 3. From this setup, we see that the greedy strategy is not optimal for this solution.
+        What greedy picks: In the example above, greedy would choose to go to the crown first for a cost of 1 and then go to the sword for a cost of 1000, giving a total cost of 1001.
+        What optimal picks: In the optimal solution, the algorithm would travel to the sword first for a cost of 2, and then travel to the crown for a total of 3, much lower than that of the greedy solution.
+        Why greedy loses: Greedy loses because it doesn't look ahead. It only looks for the most optimal solution at the local level which causes a larger global total down the line. In this example it didn't look for the consequences of picking the local minimum.
+    
+    What the Algorithm Must Explore
+        The algorithm must explore every possible order of visiting the relics, because we must find every combination of pathing since there is no greedy solution that can decide the order.
+
     """
-    return "TODO"
 
 
 # =============================================================================
