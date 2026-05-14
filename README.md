@@ -40,8 +40,6 @@
 
 ### Part 2c: Precomputation Complexity
 
-> State the total complexity and show the arithmetic. Two to three lines max.
-
 - **Number of Dijkstra runs:** _k + 1_
 - **Cost per run:** _O(m log n)_
 - **Total complexity:** _O((k + 1) * O(m log n) = O(k * m log n)_
@@ -51,38 +49,29 @@
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
 
 ### Part 3a: What the Invariant Means
 
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
-
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  _This means the shortest distance to this node from source is already found and will not be altered._
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  _These nodes have not yet been fully checked and all that is stored so far is the shortest path we have so far with the given finalized nodes in S._
 
 ### Part 3b: Why Each Phase Holds
 
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+  _Before the first iteration S is empty and only the source is within the dictionary with its given distance value of 0. The invariant hold because it should be a distance of 0 from source to source with an empty S, which is true._
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+  _When looking at the current node with the min-dist, every other options forces the current node to pass through an unfinalized neighbor node. Since we know the edge weights are all nonnegative, that action would add cost, showing the min-dist node is always the correct choice._
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+  _At the end of the loop, every reachable node has been finalized and every unreachable node is set to infinity. Every finalized node has its shortest distance from the source/spawn, showing the algorithm correctly finds the shortest path._
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
-
-_Your answer here._
+_The entire route plan relies on correct distances to between the spawn node, relic nodes, and the exit, because the planner adds them up to score each route and make a decision._
 
 ---
 

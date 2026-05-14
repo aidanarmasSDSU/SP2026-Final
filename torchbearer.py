@@ -95,15 +95,22 @@ def precompute_distances(graph, spawn, relics, exit_node):
 
 def dijkstra_invariant_check():
     """
-    Returns
-    -------
-    str
-        Your Part 3 README answers, written as a string.
-        Must match what you wrote in README Part 3.
+    Part 3a: What the Invariant Means
+        For nodes already finalized (in S):
+            This means the shortest distance to this node from source is already found and will not be altered.
+        For nodes not yet finalized (not in S):
+            These nodes have not yet been fully checked and all that is stored so far is the shortest path we have so far with the given finalized nodes in S.
 
-    TODO
+    Part 3b: Why Each Phase Holds
+        Initialization : why the invariant holds before iteration 1:
+            Before the first iteration S is empty and only the source is within the dictionary with its given distance value of 0. The invariant hold because it should be a distance of 0 from source to source with an empty S, which is true.
+        Maintenance : why finalizing the min-dist node is always correct:
+            When looking at the current node with the min-dist, every other options forces the current node to pass through an unfinalized neighbor node. Since we know the edge weights are all nonnegative, that action would add cost, showing the min-dist node is always the correct choice.
+        Termination : what the invariant guarantees when the algorithm ends:
+            At the end of the loop, every reachable node has been finalized and every unreachable node is set to infinity. Every finalized node has its shortest distance from the source/spawn, showing the algorithm correctly finds the shortest path.
+    Part 3c: Why This Matters for the Route Planner
+        The entire route plan relies on correct distances to between the spawn node, relic nodes, and the exit, because the planner adds them up to score each route and make a decision.
     """
-    return "TODO"
 
 
 # =============================================================================
