@@ -12,20 +12,17 @@
 
 ## Entry 1 – 5/14 8:28AM- : Initial Plan
 
-My plan is to implement the functions in order and tackle the precomputation first. I will then use Dijkstra to 
+_My plan is to implement the functions in order and tackle the precomputation first. I will then use Dijkstra to 
  evaluate and store the mapping of paths to each relic from spawn. I then will use backtracking to resolve. The first
 implementation will be run_dijkstra because it is the core module and everything is built upon it. I expect pruning 
 and state and search space to be difficult because those are areas in which I lack the prior knowledge. 
-I will test using the ones given to us while also coming up with my own test cases.
+I will test using the ones given to us while also coming up with my own test cases._
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – 5/14 1:05PM: Design Change
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
-
-_Your entry here._
+_At part 5, my initial instinct was to backtrack by passing a new copy of relics_remaining and relics_visited_order into each recursive call. However, after tracing my own program, I notice that my algorithm doesn't backtrack as explicitly as told in the directions. To fix this, I opted for a mutate and undo pattern that uses more explicit backtracking._
 
 ---
 

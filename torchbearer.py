@@ -137,39 +137,20 @@ def explain_search():
 # =============================================================================
 
 def find_optimal_route(dist_table, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    dist_table : dict[node, dict[node, float]]
-        Output of precompute_distances.
-    spawn : node
-    relics : list[node]
-        Every node in this list must be visited at least once.
-    exit_node : node
-        The route must end here.
-
-    Returns
-    -------
-    tuple[float, list[node]]
-        (minimum_fuel_cost, ordered_relic_list)
-        Returns (float('inf'), []) if no valid route exists.
-
-    TODO
-    """
-
     # Edge Case with no Relics Just go to Exit
     if not relics:
-        nreliccost = dist_table[spawn][exit_node]
-        if nreliccost == float('inf'):
+        reliccost = dist_table[spawn][exit_node]
+        if reliccost == float('inf'):
             return (float('inf'), [])
-        return (nreliccost, [])
+        return (reliccost, [])
 
-    #STORE BEST SOLUTION SO FAR
+    #STORE BEST SOLUTION SO FAR, b[0] lowest total cost, b[1] order found
     best = [float('inf'), []]
 
     # Begin Search from Spawn, No relics found yet
     relics_remaining = set(relics)
-    _explore(dist_table, spawn, relics_remaining, [], 0, exit_node, best)
+    relics_visited_order = []
+    _explore(dist_table, spawn, relics_remaining, relics_visited_order, 0, exit_node, best)
 
     return (best[0], best[1])
 
@@ -177,33 +158,6 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
              cost_so_far, exit_node, best):
-    """
-    Recursive helper for find_optimal_route.
-
-    Parameters
-    ----------
-    dist_table : dict[node, dict[node, float]]
-    current_loc : node
-    relics_remaining : collection
-        Your chosen data structure from README Part 5b.
-    relics_visited_order : list[node]
-    cost_so_far : float
-    exit_node : node
-    best : list
-        Mutable container for the best solution found so far.
-
-    Returns
-    -------
-    None
-        Updates best in place.
-
-    TODO
-    Implement: base case, pruning, recursive case, backtracking.
-
-    REQUIRED: Add a 1-2 sentence comment near your pruning condition
-    explaining why it is safe (cannot skip the optimal solution).
-    This comment is graded.
-    """
     # Base Case: ALL RELICS VISITED GO TO EXIT
     if not relics_remaining:
         finalcost = cost_so_far + dist_table[current_loc][exit_node]
@@ -212,7 +166,8 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
             best[1] = list(relics_visited_order)
         return
 
-    #PRUNING
+    # PRUNING: This is a safe option because of the running cost is more expensive than the lowest total cost found in the paths explored, there is no possible way
+    # the branch can help improve total cost because edges are nonnegative. The fact they are nonnegative allows us to skip checks that are already above our running lowest total
     if cost_so_far >= best[0]:
         return
 
@@ -224,12 +179,16 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
         if step_cost == float('inf'):
             continue
 
-        #NEW STATE
-        newremaining = relics_remaining - {next_node}
-        newvisited = relics_visited_order + [next_node]
-        newcost = cost_so_far + step_cost
+        #Mark As Visited
+        relics_remaining.remove(next_node)
+        relics_visited_order.append(next_node)
 
-        _explore(dist_table, next_node, newremaining, newvisited, newcost, exit_node, best)
+        #Continue with updated State
+        _explore(dist_table, next_node, relics_remaining, relics_visited_order, cost_so_far + step_cost, exit_node, best)
+
+        #BACKTRACK KEY
+        relics_remaining.add(next_node)
+        relics_visited_order.pop()
 
 
 # =============================================================================
