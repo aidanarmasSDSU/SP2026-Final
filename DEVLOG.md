@@ -10,12 +10,13 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – 5/14 8:28AM- : Initial Plan
 
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
-
-_Your entry here._
+My plan is to implement the functions in order and tackle the precomputation first. I will then use Dijkstra to 
+ evaluate and store the mapping of paths to each relic from spawn. I then will use backtracking to resolve. The first
+implementation will be run_dijkstra because it is the core module and everything is built upon it. I expect pruning 
+and state and search space to be difficult because those are areas in which I lack the prior knowledge. 
+I will test using the ones given to us while also coming up with my own test cases.
 
 ---
 
