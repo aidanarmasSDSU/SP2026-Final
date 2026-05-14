@@ -26,9 +26,9 @@ _At part 5, my initial instinct was to backtrack by passing a new copy of relics
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – 5/14 2:11PM: Pruning Explanations
 
-_Your entry here._
+_After reading part 6, I realized pruning explanation and the science behind it wasn't really that clear in my mind. After reading up on it, I learned that pruning is crucial in allowing us to skip whole branches that are unable to beat the current solution. This was incredibly helpful because it allows my program to avoid exploring orderings that have no chance of being optimal, meaning we wouldn't hit that k!._
 
 ---
 
