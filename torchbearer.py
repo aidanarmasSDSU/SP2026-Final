@@ -129,7 +129,6 @@ def explain_search():
     
     What the Algorithm Must Explore
         The algorithm must explore every possible order of visiting the relics, because we must find every combination of pathing since there is no greedy solution that can decide the order.
-
     """
 
 
@@ -157,7 +156,23 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     TODO
     """
-    pass
+
+    # Edge Case with no Relics Just go to Exit
+    if not relics:
+        nreliccost = dist_table[spawn][exit_node]
+        if nreliccost == float('inf'):
+            return (float('inf'), [])
+        return (nreliccost, [])
+
+    #STORE BEST SOLUTION SO FAR
+    best = [float('inf'), []]
+
+    # Begin Search from Spawn, No relics found yet
+    relics_remaining = set(relics)
+    _explore(dist_table, spawn, relics_remaining, [], 0, exit_node, best)
+
+    return (best[0], best[1])
+
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
@@ -189,7 +204,32 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    # Base Case: ALL RELICS VISITED GO TO EXIT
+    if not relics_remaining:
+        finalcost = cost_so_far + dist_table[current_loc][exit_node]
+        if finalcost < best[0]:
+            best[0] = finalcost
+            best[1] = list(relics_visited_order)
+        return
+
+    #PRUNING
+    if cost_so_far >= best[0]:
+        return
+
+    #Recursive Case: Go through each unvisited relic
+    for next_node in relics_remaining:
+        step_cost = dist_table[current_loc][next_node]
+
+        #Skip Dead Branches that can't be reached
+        if step_cost == float('inf'):
+            continue
+
+        #NEW STATE
+        newremaining = relics_remaining - {next_node}
+        newvisited = relics_visited_order + [next_node]
+        newcost = cost_so_far + step_cost
+
+        _explore(dist_table, next_node, newremaining, newvisited, newcost, exit_node, best)
 
 
 # =============================================================================
