@@ -94,33 +94,26 @@ _The entire route plan relies on correct distances to between the spawn node, re
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
-| Component | Variable name in code | Data type | Description |
-|---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Component | Variable name in code | Data type  | Description                                                                   |
+|---|-----------------------|------------|-------------------------------------------------------------------------------|
+| Current location | current_loc           | node       | The location(spawn/relic) the torchbearer is current at in the route.         |
+| Relics already collected | relics_visited_order  | list[node] | The relics already collected, so we know to not go down that path once again. |
+| Fuel cost so far | cost_so_far           | float      | This notes the running total fuel cost and is key in allowing us to prune.    |
 
 ### Part 5b: Data Structure for Visited Relics
 
-> Fill in the table.
-
-| Property | Your answer |
-|---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Property | Your answer                                                                                                                      |
+|---|----------------------------------------------------------------------------------------------------------------------------------|
+| Data structure chosen | collection set                                                                                                                   |
+| Operation: check if relic already collected | Time complexity: O(1)                                                                                                            |
+| Operation: mark a relic as collected | Time complexity:  O(1)                                                                                                           |
+| Operation: unmark a relic (backtrack) | Time complexity:  O(1)                                                                                                           |
+| Why this structure fits | This structure fits because sets are hash tables that give O(1) for checking, adding, and removing, a key in quick backtracking. |
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** _O(k!)_
+- **Why:** _As described before, the worst case of orders is O(k!) because we would have to search every viable path for k relics which is k!._
 
 ---
 
