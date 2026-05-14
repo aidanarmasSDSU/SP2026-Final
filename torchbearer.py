@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Aidan Armas
+Student ID:  827612871
 
 INSTRUCTIONS
 ------------
@@ -25,16 +25,16 @@ import heapq
 # =============================================================================
 
 def explain_problem():
-    """
-    Returns
-    -------
-    str
-        Your Part 1 README answers, written as a string.
-        Must match what you wrote in README Part 1.
+    return """
+    Why a single shortest-path run from S is not enough:
+    Single Dijkstra gives shortest distance to every other node from spawn, but not the costs between nodes/relics. Torchbearer will visit relics one after another, so it needs those costs as well
 
-    TODO
-    """
-    return "TODO"
+    What decision remains after all inter-location costs are known:
+    The order in which relics are visited must be decided. We must find which route has the smallest total cost for Torchbearer.
+
+    Why this requires a search over orders (one sentence):
+    An optimal answer is entirely dependent on the order in which the nodes are visited for lowest cost, so we must search over orders.
+"""
 
 
 # =============================================================================
