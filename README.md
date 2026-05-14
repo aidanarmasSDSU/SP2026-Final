@@ -23,33 +23,29 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
-| Source Node Type | Why it is a source |
-|---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Source Node Type | Why it is a source                                                                                                         |
+|------------------|----------------------------------------------------------------------------------------------------------------------------|
+| _Spawn Node_     | _This will always be the beginning of the route, so we must see all initial distances from this node._                     |
+| _Relics_         | _The Torchbearer will go from relic to relic if that is the most optimal solution, so we need the distances between each._ |
 
 ### Part 2b: Distance Storage
 
-> Fill in the table. No prose required.
-
-| Property | Your answer |
-|---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Property | Your answer                                                                                |
+|---|--------------------------------------------------------------------------------------------|
+| Data structure name | Nested Dictionary                                                                          |
+| What the keys represent | The outer key represents source node and the inner key is destination node                 |
+| What the values represent | Shortest path from the source node to destination node                                     |
+| Lookup time complexity | O(1)                                                                                       |
+| Why O(1) lookup is possible | O(1) is possible because pythons dictionaries are just hash tables which have O(1) lookup. |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** _k + 1_
+- **Cost per run:** _O(m log n)_
+- **Total complexity:** _O((k + 1) * O(m log n) = O(k * m log n)_
+- **Justification (one line):** _This makes sense because Dijkstra must run one time from spawn and one from each k relics giving k + 1. O(m log n) is given and by combining these we get O(k* m log n) as the 1 is dropped in big O._
 
 ---
 

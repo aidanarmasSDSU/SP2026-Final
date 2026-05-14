@@ -4,17 +4,6 @@ The Torchbearer
 
 Student Name: Aidan Armas
 Student ID:  827612871
-
-INSTRUCTIONS
-------------
-- Implement every function marked TODO.
-- Do not change any function signature.
-- Do not remove or rename required functions.
-- You may add helper functions.
-- Variable names in your code must match what you define in README Part 5a.
-- The pruning safety comment inside _explore() is graded. Do not skip it.
-
-Submit this file as: torchbearer.py
 """
 
 import heapq
@@ -42,60 +31,62 @@ def explain_problem():
 # =============================================================================
 
 def select_sources(spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    spawn : node
-    relics : list[node]
-    exit_node : node
+    #Spawn As Source
+    sources = [spawn]
 
-    Returns
-    -------
-    list[node]
-        No duplicates. Order does not matter.
+    for relic in relics:
+        if relic not in sources: # Don't add Spawn Twice
+            sources.append(relic)
 
-    TODO
-    """
-    pass
+    return sources
 
 
 def run_dijkstra(graph, source):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-        graph[u] = [(v, cost), ...]. All costs are nonnegative integers.
-    source : node
+    # Start Empty & Fill As Go
+    shortest = {source: 0}
 
-    Returns
-    -------
-    dict[node, float]
-        Minimum cost from source to every node in graph.
-        Unreachable nodes map to float('inf').
+    # MinHeap (distance, node)
+    heap = [(0, source)]
 
-    TODO
-    """
-    pass
+    while heap:
+        popped = heapq.heappop(heap)
+        currentdistance = popped[0]
+        currentnode = popped[1]
+
+        #Skip Stale Entry
+        if currentdistance > shortest[currentnode]:
+            continue
+
+        for edge in graph[currentnode]:
+            neighbor = edge[0]
+            edgecost = edge[1]
+            newdistance = currentdistance + edgecost
+
+            if newdistance < shortest.get(neighbor, float('inf')):
+                shortest[neighbor] = newdistance
+                heapq.heappush(heap, (newdistance, neighbor))
+
+    #Fill Unreachable Nodes With Infinity
+    for node in graph:
+        if node not in shortest:
+            shortest[node] = float('inf')
+
+    return shortest
 
 
 def precompute_distances(graph, spawn, relics, exit_node):
-    """
-    Parameters
-    ----------
-    graph : dict[node, list[tuple[node, int]]]
-    spawn : node
-    relics : list[node]
-    exit_node : node
+    #List of Nodes To Run Dijkstra
+    sources = select_sources(spawn, relics, exit_node)
 
-    Returns
-    -------
-    dict[node, dict[node, float]]
-        Nested structure supporting dist_table[u][v] lookups
-        for every source u your design requires.
+    if not sources:
+        return {}
 
-    TODO
-    """
-    pass
+    #Store Results of each source (Spawn, Relic)
+    distances = {}
+    for source in sources:
+        distances[source] = run_dijkstra(graph, source)
+
+    return distances
 
 
 # =============================================================================
