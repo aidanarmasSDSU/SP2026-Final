@@ -134,12 +134,15 @@ _The entire route plan relies on correct distances to between the spawn node, re
 ### Part 6c: Pruning Correctness
 
 - _Pruning is safe because we only prune a branch if there is no possible way that certain branch/path CAN lower the total cost._
-- _All edge weights are nonnegative, so their is no way a branch with a cost higher than the best[0] can be lowered if continuing.
+- _All edge weights are nonnegative, so there is no way a branch with a cost higher than the best[0] can be lowered if continuing.
 
 ---
 
 ## References
 
-> Bullet list. If none beyond lecture notes, write that.
-
-- _Your references here._
+- https://www.cs.cmu.edu/~bhiksha/courses/10-601/decisiontrees/
+  - _I used the pruning decision trees portion to educate me on how pruning really works from a visual standpoint and how it can benefit our decision tree. I verified the source by looking at the publisher and seeing its coming from a University course, so it is reputable._
+- https://www.cs.cornell.edu/courses/cs2112/2015fa/lectures/lecture.html?id=ssp
+  - I used the explanation as well as pseudocode to understand how Dijkstra works. I wanted to understand how it works on a basic level before I implement it for my problem ON MY OWN. I also looked at the performance section so I can better understand how this affects the runtime of my program. I verified this by also making sure the source came from a University.
+- https://docs.python.org/3/library/heapq.html
+  - I used the different functions provided for min-heaps to help understand and apply the concepts I had learned about Dijkstra's algorithm and the explore function. This was verified because it is pythons official documentation.
